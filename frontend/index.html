@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Tua Vita in Numeri</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>La Tua Vita in Numeri</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="birthdate">Data di nascita:</label>
+                <input type="datetime-local" id="birthdate" required>
+            </div>
+            <div class="input-group">
+                <label for="gender">Sesso:</label>
+                <select id="gender" required>
+                    <option value="">Seleziona...</option>
+                    <option value="M">Maschio</option>
+                    <option value="F">Femmina</option>
+                </select>
+            </div>
+            <button onclick="calculateMetrics()">Calcola</button>
+        </div>
+
+        <div id="results" class="hidden">
+            <div class="age-display">
+                <h2 id="formatted-age">La tua età</h2>
+            </div>
+
+            <div class="realtime-metrics-grid">
+                <div class="metric-card">
+                    <i class="material-icons">timer</i>
+                    <h3>Secondi Vissuti</h3>
+                    <div class="metric-values">
+                        <p><span id="seconds">0</span> secondi</p>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">av_timer</i>
+                    <h3>Minuti Vissuti</h3>
+                    <div class="metric-values">
+                        <p><span id="minutes">0</span> minuti</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card time-card">
+                    <i class="material-icons">schedule</i>
+                    <h3>Tempo Vissuto</h3>
+                    <div class="metric-values">
+                        <p><span id="years">0</span> anni</p>
+                        <p><span id="months">0</span> mesi</p>
+                        <p><span id="days">0</span> giorni</p>
+                        <p><span id="hours">0</span> ore</p>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">calendar_today</i>
+                    <h3>Anni Bisestili</h3>
+                    <div class="metric-values">
+                        <p><span id="leapYears">0</span> anni bisestili</p>
+                    </div>
+                    <canvas id="leapYearsChart"></canvas>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">nightlight</i>
+                    <h3>Cicli Lunari</h3>
+                    <div class="metric-values">
+                        <p><span id="lunarCycles">0</span> cicli</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="lunarProgress" class="progress-fill progress-lunar"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">wb_sunny</i>
+                    <h3>Stagioni</h3>
+                    <div class="metric-values">
+                        <p><span id="seasons">0</span> stagioni</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="seasonsProgress" class="progress-fill progress-seasons"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <i class="material-icons">wb_sunny</i>
+                    <h3>Eclissi Solari</h3>
+                    <div class="metric-values">
+                        <p><span id="solarEclipses">0</span> eclissi</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="solarProgress" class="progress-fill progress-solar"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">brightness_2</i>
+                    <h3>Eclissi Lunari</h3>
+                    <div class="metric-values">
+                        <p><span id="lunarEclipses">0</span> eclissi</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="lunarEclipsesProgress" class="progress-fill progress-lunar-eclipses"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">wb_twilight</i>
+                    <h3>Solstizi</h3>
+                    <div class="metric-values">
+                        <p><span id="solstices">0</span> solstizi</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="solsticesProgress" class="progress-fill progress-solstices"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <i class="material-icons">brightness_4</i>
+                    <h3>Equinozi</h3>
+                    <div class="metric-values">
+                        <p><span id="equinoxes">0</span> equinozi</p>
+                    </div>
+                    <div class="progress-container">
+                        <div id="equinoxesProgress" class="progress-fill progress-equinoxes"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="life-journey-card">
+                <h3>Il Tuo Viaggio</h3>
+                <div class="journey-container">
+                    <div class="journey-icon">
+                        <i class="material-icons">child_care</i>
+                    </div>
+                    <div class="journey-progress">
+                        <div class="progress-bar">
+                            <div id="life-progress" class="progress-fill"></div>
+                        </div>
+                        <div class="progress-labels">
+                            <span id="years-lived">0 anni</span>
+                            <span id="years-total">100 anni</span>
+                        </div>
+                    </div>
+                    <div class="journey-icon">
+                        <i class="material-icons">elderly</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

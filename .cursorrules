@@ -1,0 +1,9 @@
+Web app che mi restituisca diversi contatori una volta inserito il giorno di nascita. 
+I contatori dovrebbero essere qualcosa del tipo:
+- secondi
+- giorni
+- anni bisestili
+- cicli lunari
+- stagioni
+
+ecc...
