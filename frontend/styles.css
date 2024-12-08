@@ -5,6 +5,10 @@
     --card-background: #ffffff;
     --text-color: #333333;
     --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --male-primary: #2196f3;
+    --male-secondary: #1976d2;
+    --female-primary: #e91e63;
+    --female-secondary: #c2185b;
 }
 
 * {
@@ -28,7 +32,7 @@ body {
 
 h1 {
     text-align: center;
-    color: var(--primary-color);
+    color: var(--text-color);
     margin-bottom: 2rem;
     font-weight: 500;
 }
@@ -79,7 +83,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     margin-top: 1rem;
 }
 
@@ -329,4 +333,52 @@ button:hover {
 
 .progress-equinoxes {
     background-color: #4caf50;
+}
+
+.zodiac-signs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.zodiac-western, .zodiac-chinese {
+    text-align: center;
+    flex: 1;
+}
+
+.zodiac-icon {
+    display: block;
+    font-size: 2.5em;
+    margin-bottom: 8px;
+    color: #2196f3;
+}
+
+.zodiac-western p, .zodiac-chinese p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Stili per il genere */
+body[data-gender="male"] {
+    --primary-color: var(--male-primary);
+    --secondary-color: var(--male-secondary);
+}
+
+body[data-gender="female"] {
+    --primary-color: var(--female-primary);
+    --secondary-color: var(--female-secondary);
+}
+
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
 }
